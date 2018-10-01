@@ -1,0 +1,14 @@
+{
+	"name": "board_frontend",
+	"scripts": {
+		"dev": "nuxt"
+	},
+	"dependencies": {
+		"axios": "^0.18.0",
+		"nuxt": "^2.1.0"
+	},
+	"devDependencies": {
+		"less": "^3.8.1",
+		"less-loader": "^4.1.0"
+	}
+}

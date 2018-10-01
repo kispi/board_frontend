@@ -1,0 +1,31 @@
+.popover-container {
+    padding: 0;
+    pointer-events: none;
+
+    &.editable {
+        background: #fff !important;
+        pointer-events: initial;
+
+        &.end-at > div {
+            left: initial !important;
+            right: 0 !important;
+        }
+    }
+
+    > input {
+        width: 100%;
+        background: none;
+    }
+}
+
+.create-record {
+    .popover-container {
+        margin-top: 10px;
+        margin-bottom: 20px;
+
+        > input {
+            width: 100%;
+            display: block;
+        }
+    }
+}
