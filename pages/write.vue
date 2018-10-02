@@ -107,6 +107,7 @@ input, textarea {
 
 textarea {
     height: 240px;
+    resize: none;
 }
 
 .btn-container > button {
