@@ -1,11 +1,25 @@
 module.exports = {
+    head: {
+        meta: [
+            { charset: 'utf-8' },
+            { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+            { hid: 'description', name: 'description', content: 'Meta description' }
+        ]
+    },
     css: [
         { src: '@/assets/styles/index.less', lang: 'less' },
     ],
     plugins: [
+        '@/plugins/axios',
         '@/plugins/global',
+        '@/plugins/moment',
         '@/plugins/translate',
         '@/plugins/validator',
         '@/filters/index',
+        '@/directives/index'
     ],
+    env: {
+        baseUrl: process.env.BASE_URL || 'http://localhost:3000',
+        apiUrl: 'http://localhost:4500/v1/'
+    }
 }

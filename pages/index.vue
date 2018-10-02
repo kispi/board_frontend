@@ -1,16 +1,18 @@
 <template>
-    <h1 class="c-primary">{{ 'BOARD' | translate }}</h1>
+    
 </template>
 <script>
+import * as $http from 'axios'
+
 export default {
-    mounted() {
-        this.init();
+    async asyncData ({ params }) {
+        const resp = await $http.get('boards')
+        return { boards: resp.data.data }
     },
-    methods: {
-        async init() {
-            console.log(this.$translate("BOARD"));
-        }
-    }
+    mounted() {
+        this.$router.push("main")
+    },
+
 }
 </script>
 <style lang="less">

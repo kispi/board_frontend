@@ -2,5 +2,45 @@
     "BOARD": {
         "en": "Board",
         "kr": "게시판"
+    },
+    "ADD_BOARD": {
+        "en": "Add Board",
+        "kr": "게시판 추가"
+    },
+    "ERR_BOARD_NOT_EXIST": {
+        "en": "Board doesn't exist",
+        "kr": "존재하지 않는 게시판입니다"
+    },
+    "WRITE": {
+        "en": "Write",
+        "kr": "글쓰기"
+    },
+    "BOARD_CREATED_AT": {
+        "en": "Board Created At",
+        "kr": "게시판 생성"
+    },
+    "SAVE": {
+        "en": "Save",
+        "kr": "등록"
+    },
+    "CANCEL": {
+        "en": "Cancel",
+        "kr": "취소"
+    },
+    "NICKNAME": {
+        "en": "Nickname",
+        "kr": "닉네임"
+    },
+    "PASSWORD": {
+        "en": "Password",
+        "kr": "비밀번호"
+    },
+    "WRITE_TITLE_PLACEHOLDER": {
+        "en": "Write the title",
+        "kr": "제목을 입력해주세요"
+    },
+    "WRITE_TEXT_PLACEHOLDER": {
+        "en": "Write the text",
+        "kr": "본문을 입력해주세요"
     }
 }
