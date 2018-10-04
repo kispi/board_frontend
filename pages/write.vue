@@ -106,17 +106,20 @@ export default {
             if (!this.valid) {
                 let save = this.$refs["save"]
                 this.$shake(save)
+                this.toast("Failed to save", "bg-danger")
             }
-            this.toast("Failed to save")
+            
             try {
                 const resp = await $http.post("articles", this.article)
             } catch (e) {
-                this.toast("Failed to save")
+                console.error(e)
+                this.toast("Failed to save", "bg-danger")
             }
         },
-        toast(msg) {
+        toast(msg, bgClass) {
             this.$store.dispatch("app/toast/setToast", {
-                message: msg
+                message: msg,
+                class: bgClass
             })
         }
     },

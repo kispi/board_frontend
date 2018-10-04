@@ -2,32 +2,6 @@ import Vue from 'vue'
 import { store as $store } from '@/store'
 import * as $http from 'axios'
 
-export const Toast = {
-    install(Vue, options) {
-        let payload = function(msg, dismiss, bgm) {
-            let p = {
-                message: msg
-            }
-            if (dismiss) {
-                p.type = "dismiss"
-            }
-            p.class = bgm;
-            return p;
-        }
-        Vue.prototype.$toast = {
-            success(msg, dismiss) {
-                $store.dispatch("setToast", payload(msg, dismiss, "bg-success"));
-            },
-            error(msg, dismiss) {
-                $store.dispatch("setToast", payload(msg, dismiss, "bg-danger"));
-            },
-            warning(msg, dismiss) {
-                $store.dispatch("setToast", payload(msg, dismiss, "bg-warning"));
-            }
-        }
-    }
-};
-
 export const Shake = {
     install(Vue) {
         Vue.prototype.$shake = function(elem) {
@@ -77,7 +51,6 @@ export const Download = {
     }
 }
 
-Vue.use(Toast)
 Vue.use(Shake)
 Vue.use(Loading)
 Vue.use(Copy)
