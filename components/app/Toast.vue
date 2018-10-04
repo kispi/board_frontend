@@ -21,22 +21,22 @@
 export default {
     methods: {
         dismiss() {
-            this.$store.dispatch("removeToast");
+            this.$store.dispatch("app/toast/removeToast");
         },
         toastClicked() {},
     },
     computed: {
         showToast() {
-            return this.toast.show;
+            return this.toast.show
         },
         toast() {
-            return this.$store.getters.toast;
+            return this.$store.getters["app/toast/toast"]
         },
         html() {
             return this.$options.filters.textToHTML(
                 this.$translate(this.toast.message)
             );
-        }
+        },
     },
     watch: {
         showToast() {
@@ -46,11 +46,11 @@ export default {
                 }
                 if (!this.toast.type) {
                     this.toastTimeout = setTimeout(() => {
-                        this.$store.dispatch("removeToast");
+                        this.$store.dispatch("app/toast/removeToast");
                     }, 3000);
                 }
             }
-        }
+        },
     }
 };
 </script>

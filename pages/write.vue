@@ -37,7 +37,11 @@
                 />
         </form>
         <div class="btn-container">
-            <button class="btn btn-primary save" @click="onClickSave">{{ 'SAVE' | translate }}</button>
+            <button
+                ref="save"
+                class="btn btn-primary save"
+                :class="{ 'disabled' : !valid }"
+                @click="onClickSave">{{ 'SAVE' | translate }}</button>
             <button class="btn btn-default cancel" @click="onClickCancel">{{ 'CANCEL' | translate }}</button>
         </div>
     </div>
@@ -46,10 +50,11 @@
 <script>
 import * as $http from 'axios'
 import Modal from '@/components/modals/Modal'
+import Toast from '@/components/app/Toast'
 
 export default {
     layout: 'navs',
-    components: { Modal },
+    components: { Modal, Toast },
     async asyncData ({ p, query }) {
         let params = {
             filter: "title" + ":" + query.board_title
@@ -73,11 +78,21 @@ export default {
             title: null,
             text: null,
         },
-        showErrorNoBoard: false
+        showErrorNoBoard: false,
+        valid: false
     }),
     mounted() {
         this.article.board = this.board
         this.showErrorNoBoard = !this.board
+    },
+    watch: {
+        article: {
+            handler(newVal) {
+                this.valid = (newVal.nickname && newVal.password && newVal.title && newVal.text) &&
+                    (newVal.nickname !== "" && newVal.password !== "" && newVal.title !== "" && newVal.text !== "")
+            },
+            deep: true
+        }
     },
     methods: {
         onClose() {
@@ -88,13 +103,21 @@ export default {
             this.$router.go(-1)
         },
         async onClickSave() {
-            this.$toast.error("Failed to save")
+            if (!this.valid) {
+                let save = this.$refs["save"]
+                this.$shake(save)
+            }
+            this.toast("Failed to save")
             try {
                 const resp = await $http.post("articles", this.article)
             } catch (e) {
-                console.error(e)
-                this.$toast.error("Failed to save")
+                this.toast("Failed to save")
             }
+        },
+        toast(msg) {
+            this.$store.dispatch("app/toast/setToast", {
+                message: msg
+            })
         }
     },
 }

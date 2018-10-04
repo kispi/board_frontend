@@ -14,7 +14,6 @@ export const Toast = {
             p.class = bgm;
             return p;
         }
-
         Vue.prototype.$toast = {
             success(msg, dismiss) {
                 $store.dispatch("setToast", payload(msg, dismiss, "bg-success"));
@@ -28,6 +27,19 @@ export const Toast = {
         }
     }
 };
+
+export const Shake = {
+    install(Vue) {
+        Vue.prototype.$shake = function(elem) {
+            if (elem) {
+                elem.classList.add("shake")
+                setTimeout(() => {
+                    elem.classList.remove("shake")
+                }, 500)
+            }
+        }
+    }
+}
 
 export const Loading = {
     install(Vue) {
@@ -66,6 +78,7 @@ export const Download = {
 }
 
 Vue.use(Toast)
+Vue.use(Shake)
 Vue.use(Loading)
 Vue.use(Copy)
 Vue.use(Download)
