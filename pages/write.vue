@@ -106,14 +106,15 @@ export default {
             if (!this.valid) {
                 let save = this.$refs["save"]
                 this.$shake(save)
-                this.toast("Failed to save", "bg-danger")
+                this.toast(this.$translate("ERROR_SAVE"), "bg-danger")
             }
             
             try {
                 const resp = await $http.post("articles", this.article)
+                this.toast(this.$translate("SUCCESS_SAVE"), "bg-success")
+                this.$router.push({ name: "boards", query: { board_title: this.$route.query.board_title } })
             } catch (e) {
-                console.error(e)
-                this.toast("Failed to save", "bg-danger")
+                this.toast(this.$translate(e.response.data), "bg-danger")
             }
         },
         toast(msg, bgClass) {

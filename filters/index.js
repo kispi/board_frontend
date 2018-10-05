@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import json from '@/assets/translations.json';
+
 export const translate = (key, temporaryLocale) => {
     let locale = "kr";
     if (temporaryLocale) {

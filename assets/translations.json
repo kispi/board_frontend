@@ -11,6 +11,10 @@
         "en": "Board doesn't exist",
         "kr": "존재하지 않는 게시판입니다"
     },
+    "MISSING_REQUIRED_FIELD": {
+        "en": "Required field missing",
+        "kr": "생략된 필수항목이 있습니다"
+    },
     "WRITE": {
         "en": "Write",
         "kr": "글쓰기"
