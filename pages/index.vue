@@ -10,7 +10,7 @@ export default {
         return { boards: resp.data.data }
     },
     mounted() {
-        this.$router.push("main")
+        this.$router.push("board")
     },
 
 }

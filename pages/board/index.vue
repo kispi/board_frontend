@@ -8,7 +8,7 @@
                 <li
                     v-for="board in boards"
                     :key="board.id">
-                    <nuxt-link :to="{ name: 'board-title', params: { id: board.title } }">
+                    <nuxt-link :to="{ name: 'board-title', params: { title: board.title } }">
                         <div class="flex-wrap">{{ board.title }} ({{ board.description }})</div>
                     </nuxt-link>
                 </li>
@@ -24,9 +24,6 @@ export default {
     async asyncData ({ params }) {
         const resp = await $http.get('boards')
         return { boards: resp.data.data }
-    },
-    mounted() {
-        this.$router.push("main")
     },
 }
 </script>

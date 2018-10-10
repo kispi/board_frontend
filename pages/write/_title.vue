@@ -1,13 +1,5 @@
 <template>
     <div>
-        <Modal @close="onClose" v-if="showErrorNoBoard">
-            <h3 slot="header">{{ 'ERR_BOARD_NOT_EXIST' | translate }}</h3>
-            <div class="btn-container" slot="footer">
-                <button
-                    @click="onClose"
-                    class="btn btn-primary">{{ 'OK' | translate }}</button>
-            </div>
-        </Modal>
         <form>
             <div class="flex-row m-b-8">
                 <input
@@ -49,19 +41,19 @@
 
 <script>
 import * as $http from 'axios'
-import Modal from '@/components/modals/Modal'
 import Toast from '@/components/app/Toast'
 
 export default {
     layout: 'navs',
-    components: { Modal, Toast },
-    async asyncData ({ p, query }) {
-        let params = {
-            filter: "title" + ":" + query.board_title
+    components: { Toast },
+    async asyncData ({ params, query }) {
+        console.log(params);
+        let myParams = {
+            filter: "title" + ":" + params.title
         }
         let board;
         try {
-            const resp = await $http.get('boards', { params })
+            const resp = await $http.get('boards', { params: myParams })
             board = resp.data.data[0]
         } catch (e) {
             console.error(e.response.data)
@@ -78,12 +70,13 @@ export default {
             title: null,
             text: null,
         },
-        showErrorNoBoard: false,
         valid: false
     }),
-    mounted() {
-        this.article.board = this.board
-        this.showErrorNoBoard = !this.board
+    async validate ({ params }) {
+        const r1 = await $http.get('boards', { params: {
+            filter: "title" + ":" + params.title
+        }})
+        return r1.data.total === 1;
     },
     watch: {
         article: {
@@ -95,10 +88,6 @@ export default {
         }
     },
     methods: {
-        onClose() {
-            this.showErrorNoBoard = false
-            this.$router.go(-1)
-        },
         onClickCancel() {
             this.$router.go(-1)
         },
@@ -112,7 +101,7 @@ export default {
             try {
                 const resp = await $http.post("articles", this.article)
                 this.toast(this.$translate("SUCCESS_SAVE"), "bg-success")
-                this.$router.push({ name: "boards", query: { board_title: this.$route.query.board_title } })
+                this.$router.push({ name: "board-title", params: { title: this.$route.params.title } })
             } catch (e) {
                 this.toast(this.$translate(e.response.data), "bg-danger")
             }
