@@ -5,12 +5,27 @@
             @click="onClickArticle(article)"
             :key="article.id">
             <div class="flex-row">
-                {{ article.id }}
-                {{ article.title }}
-            </div>
-            <div class="flex-row">
-                {{ article.nickname }}
-                {{ article.createdAt | formatDate("YYYY-MM-DD", true) }}
+                <div class="flex-fill article-info">
+                    <div class="flex-row flex-wrap">
+                        <span class="flex-wrap vr">
+                            {{ article.id }}
+                        </span>
+                        {{ article.title }}
+                    </div>
+                    <div class="flex-row c-text">
+                        <span class="flex-wrap vr">
+                            {{ article.nickname }}
+                        </span>
+                        <span class="flex-wrap vr">
+                            {{ article.createdAt | formatDate("YYYY-MM-DD", true) }}
+                        </span>
+                        <span class="flex-wrap">
+                            {{ 'VIEWS' | translate }}
+                            {{ article.views }}
+                        </span>
+                    </div>
+                </div>
+                <div class="flex flex-wrap flex-center reply">2</div>
             </div>
         </li>
     </ul>
@@ -31,8 +46,3 @@ export default {
     }
 }
 </script>
-<style lang="less" scoped>
-li {
-    padding: 8px !important;
-}
-</style>

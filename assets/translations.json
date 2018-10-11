@@ -28,8 +28,12 @@
         "kr": "삭제"
     },
     "DELETE_CONFIRM": {
-        "en": "Delete article?",
-        "kr": "게시글을 삭제하시겠습니까?"
+        "en": "Delete article",
+        "kr": "게시글을 삭제합니다"
+    },
+    "DELETE_CONFIRM_TXT": {
+        "en": "Type the password that you put when you write this article",
+        "kr": "게시글 작성 시 기입한 비밀번호를 입력하세요"
     },
     "CONFIRM": {
         "en": "Confirm",
@@ -62,5 +66,13 @@
     "WRITE_TEXT_PLACEHOLDER": {
         "en": "Write the text",
         "kr": "본문을 입력해주세요"
+    },
+    "SUCCESS_SAVE": {
+        "en": "Saved",
+        "kr": "저장되었습니다"
+    },
+    "ERROR_SAVE": {
+        "en": "Failed to save",
+        "kr": "저장에 실패하였습니다"
     }
 }

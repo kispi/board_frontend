@@ -1,14 +1,53 @@
 ul.articles {
     cursor: pointer;
     padding: 0;
+    margin: 0;
 
     li {
         margin: 0;
-        padding: 5px;
         list-style-type: none;
-        border-bottom: solid 1px rgba(0, 0, 0, 0.2);
+        border-bottom: @border-gray;
         font-size: 13px;
-        padding: 5px 0;
         .c-dark();
+
+        &:nth-child(1) {
+            border-top: @border-gray;
+        }
+
+        .article-info {
+            padding: 5px 10px;
+        }
+    
+        .reply {
+            text-align: center;
+            min-width: 32px;
+            background: rgba(0, 0, 0, 0.05);
+            color: @brand-accent;
+        }
+    }
+}
+
+.article {
+    font-size: 13px;
+
+    .article-title {
+        font-size: 16px;
+        font-weight: 800;
+    }
+
+    .article-info {
+        padding: 8px 8px;
+        border-top: @border-gray;
+    }
+
+    .article-text {
+        white-space: pre-line;
+        overflow-wrap: break-word;
+        border-top: @border-gray;
+        padding: 16px 8px;
+
+        img {
+            max-width: 100%;
+        }
     }
 }

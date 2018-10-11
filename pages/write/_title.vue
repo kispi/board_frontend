@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="write">
         <form>
             <div class="flex-row m-b-8">
                 <input
@@ -47,7 +47,6 @@ export default {
     layout: 'BaseLayout',
     components: { Toast },
     async asyncData ({ params, query }) {
-        console.log(params);
         let myParams = {
             filter: "title" + ":" + params.title
         }
@@ -104,7 +103,7 @@ export default {
                 this.toast(this.$translate("SUCCESS_SAVE"), "bg-success")
                 this.$router.push({ name: "board-title", params: { title: this.$route.params.title } })
             } catch (e) {
-                this.toast(this.$translate(e.response.data), "bg-danger")
+                this.toast(this.$translate("ERROR_SAVE"), "bg-danger")
             }
         },
         toast(msg, bgClass) {
@@ -118,6 +117,10 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.write {
+    padding: 8px;
+}
+
 input, textarea {
     width: 100%;
 }

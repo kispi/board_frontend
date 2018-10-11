@@ -1,41 +1,12 @@
 <template>
-    <div>
-        <div v-if="board">
+    <div class="article-detail">
 
-            <Modal v-if="showConfirmDelete" @close="showConfirmDelete = false">
-                <h4 class="c-danger" slot="header">{{ 'DELETE_CONFIRM' | translate }}</h4>
-                <div class="flex-rtl" slot="footer">
-                    <button class="btn btn-default" @click="showConfirmDelete = false">{{ 'CANCEL' | translate }}</button>
-                    <button class="btn btn-danger" @click="onDeleteConfirm">{{ 'CONFIRM' | translate }}</button>
-                </div>
-            </Modal>
+        <BoardInfo :board="board" :article="article"/>
 
-            <div class="flex-row">
-                <div class="flex-wrap">
-                    <h2 class="c-secondary">{{ board.title }} <span v-if="board.description">({{ board.description }})</span></h2>
-                </div>
-                <div class="flex-row flex-rtl items-center">
-                    {{ board.createdAt | formatDate("YYYY-MM-DD") }}
-                </div>
-            </div>
+        <Article :article="article"/>
 
-            <div class="btn-container flex-rtl">
-                <button
-                    class="btn btn-sm btn-default m-b-16"
-                    @click="onClickWrite">{{ 'WRITE' | translate }}</button>
-                <button
-                    class="btn btn-sm btn-danger m-b-16"
-                    @click="showConfirmDelete = true">{{ 'DELETE' | translate }}</button>
-            </div>
+        <Articles :articles="articles"/>
 
-            <Article :article="article"/>
-
-            <Articles :articles="articles"/>
-
-        </div>
-        <div v-else>
-            {{ 'BOARD_NOT_EXIST' | translate }}
-        </div>
     </div>
 </template>
 
@@ -43,14 +14,12 @@
 import * as $http from 'axios'
 import Article from '@/components/Article'
 import Articles from '@/components/Articles'
+import BoardInfo from '@/components/BoardInfo'
 import Modal from '@/components/modals/Modal'
 
 export default {
     layout: 'BaseLayout',
-    components: { Article, Articles, Modal },
-    data: () => ({
-        showConfirmDelete: false,
-    }),
+    components: { Article, Articles, BoardInfo, Modal },
     async asyncData ({ params, query }) {
         let board, articles, article;
         try {
@@ -83,15 +52,6 @@ export default {
             filter: "title" + ":" + params.title
         }})
         return r1.data.total === 1;
-    },
-    methods: {
-        onClickWrite() {
-            this.$router.push({ name: "write-title", params: { title: this.$route.params.title }})
-        },
-        onDeleteConfirm() {
-            this.showConfirmDelete = false;
-            this.$router.push({ name: "board-title", params: { tilte: this.$route.params.title }})
-        }
     },
 }
 </script>
