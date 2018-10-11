@@ -20,7 +20,7 @@
 import * as $http from 'axios'
 
 export default {
-    layout: 'navs',
+    layout: 'BaseLayout',
     async asyncData ({ params }) {
         const resp = await $http.get('boards')
         return { boards: resp.data.data }

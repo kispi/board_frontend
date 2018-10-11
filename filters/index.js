@@ -41,10 +41,24 @@ export const toSnake = (camel) => {
     }
 }
 
-export const formatDate = (value, format) => {
+export const formatDate = (value, format, showTrimmedTime) => {
+    let result = value;
     if (value) {
-        return Vue.prototype.$moment(String(value)).format(format || "YYYY-MM-DD hh:mm:ss");
+        let createdAt = Vue.prototype.$moment(String(value));
+        let now = Vue.prototype.$moment();
+
+        result = Vue.prototype.$moment(String(value)).format(format || "YYYY-MM-DD HH:mm:ss");
+        if (showTrimmedTime) {
+            if (createdAt.format("YYYY-MM-DD") === now.format("YYYY-MM-DD")) {
+                result = Vue.prototype.$moment(String(value)).format("HH:mm");
+            } else if (createdAt.format("YYYY") === now.format("YYYY")) {
+                result = Vue.prototype.$moment(String(value)).format("MM-DD");
+            } else {
+                result = Vue.prototype.$moment(String(value)).format("YYYY-MM-DD");
+            }
+        }
     }
+    return result;
 }
 
 Vue.filter('translate', translate)

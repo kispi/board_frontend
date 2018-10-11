@@ -15,9 +15,25 @@
         "en": "Required field missing",
         "kr": "생략된 필수항목이 있습니다"
     },
+    "VIEWS": {
+        "en": "Views",
+        "kr": "조회"
+    },
     "WRITE": {
         "en": "Write",
         "kr": "글쓰기"
+    },
+    "DELETE": {
+        "en": "Delete",
+        "kr": "삭제"
+    },
+    "DELETE_CONFIRM": {
+        "en": "Delete article?",
+        "kr": "게시글을 삭제하시겠습니까?"
+    },
+    "CONFIRM": {
+        "en": "Confirm",
+        "kr": "확인"
     },
     "BOARD_CREATED_AT": {
         "en": "Board Created At",

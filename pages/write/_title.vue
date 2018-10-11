@@ -44,7 +44,7 @@ import * as $http from 'axios'
 import Toast from '@/components/app/Toast'
 
 export default {
-    layout: 'navs',
+    layout: 'BaseLayout',
     components: { Toast },
     async asyncData ({ params, query }) {
         console.log(params);
@@ -98,6 +98,7 @@ export default {
                 this.toast(this.$translate("ERROR_SAVE"), "bg-danger")
             }
             
+            this.article.board = this.board;
             try {
                 const resp = await $http.post("articles", this.article)
                 this.toast(this.$translate("SUCCESS_SAVE"), "bg-success")

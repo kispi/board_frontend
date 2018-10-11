@@ -1,6 +1,15 @@
 <template>
     <div>
         <div v-if="board">
+
+            <Modal v-if="showConfirmDelete" @close="showConfirmDelete = false">
+                <h4 class="c-danger" slot="header">{{ 'DELETE_CONFIRM' | translate }}</h4>
+                <div class="flex-rtl" slot="footer">
+                    <button class="btn btn-default" @click="showConfirmDelete = false">{{ 'CANCEL' | translate }}</button>
+                    <button class="btn btn-danger" @click="onDeleteConfirm">{{ 'CONFIRM' | translate }}</button>
+                </div>
+            </Modal>
+
             <div class="flex-row">
                 <div class="flex-wrap">
                     <h2 class="c-secondary">{{ board.title }} <span v-if="board.description">({{ board.description }})</span></h2>
@@ -9,20 +18,20 @@
                     {{ board.createdAt | formatDate("YYYY-MM-DD") }}
                 </div>
             </div>
-            <div class="btn-container">
+
+            <div class="btn-container flex-rtl">
                 <button
-                    class="btn btn-default m-b-16"
+                    class="btn btn-sm btn-default m-b-16"
                     @click="onClickWrite">{{ 'WRITE' | translate }}</button>
+                <button
+                    class="btn btn-sm btn-danger m-b-16"
+                    @click="showConfirmDelete = true">{{ 'DELETE' | translate }}</button>
             </div>
-            <div class="selected-article" v-if="selectedArticle">
-                <div class="article-title">
-                    {{ selectedArticle.title }}
-                </div>
-                <div class="article-text">
-                    {{ selectedArticle.text }}
-                </div>
-            </div>
+
+            <Article :article="article"/>
+
             <Articles :articles="articles"/>
+
         </div>
         <div v-else>
             {{ 'BOARD_NOT_EXIST' | translate }}
@@ -32,13 +41,18 @@
 
 <script>
 import * as $http from 'axios'
+import Article from '@/components/Article'
 import Articles from '@/components/Articles'
+import Modal from '@/components/modals/Modal'
 
 export default {
-    layout: 'navs',
-    components: { Articles },
+    layout: 'BaseLayout',
+    components: { Article, Articles, Modal },
+    data: () => ({
+        showConfirmDelete: false,
+    }),
     async asyncData ({ params, query }) {
-        let board, articles, selectedArticle;
+        let board, articles, article;
         try {
             let myParams = {
                 filter: "title" + ":" + params.title
@@ -54,17 +68,14 @@ export default {
             const r2 = await $http.get('articles', { params: myParams })
             articles = r2.data.data
 
-            myParams = {
-                filter: "id" + ":" + params.articleId,
-            }
-            const r3 = await $http.get('articles', { params: myParams })
-            selectedArticle = r3.data.data[0]
+            const r3 = await $http.get('articles/' + params.articleId)
+            article = r3.data.data
         } catch(e) {
         }
         return {
             board,
             articles,
-            selectedArticle,
+            article,
         }
     },
     async validate ({ params }) {
@@ -77,13 +88,10 @@ export default {
         onClickWrite() {
             this.$router.push({ name: "write-title", params: { title: this.$route.params.title }})
         },
+        onDeleteConfirm() {
+            this.showConfirmDelete = false;
+            this.$router.push({ name: "board-title", params: { tilte: this.$route.params.title }})
+        }
     },
 }
 </script>
-<style lang="less" scoped>
-.selected-article {
-    .article-text {
-        white-space: pre-line;
-    }
-}
-</style>

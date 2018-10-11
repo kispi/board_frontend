@@ -9,9 +9,9 @@
                     {{ board.createdAt | formatDate("YYYY-MM-DD") }}
                 </div>
             </div>
-            <div class="btn-container">
+            <div class="btn-container flex-rtl">
                 <button
-                    class="btn btn-default m-b-16"
+                    class="btn btn-sm btn-default m-b-16"
                     @click="onClickWrite">{{ 'WRITE' | translate }}</button>
             </div>
             <Articles :articles="articles"/>
@@ -27,7 +27,7 @@ import * as $http from 'axios'
 import Articles from '@/components/Articles'
 
 export default {
-    layout: 'navs',
+    layout: 'BaseLayout',
     components: { Articles },
     async asyncData ({ params, query }) {
         let board, articles;

@@ -1,8 +1,8 @@
 <template>
     <div class="main">
-        <h2 class="c-primary">
+        <h3 class="c-primary">
         {{ 'BOARD' | translate }}
-        </h2>
+        </h3>
         <div v-if="boards">
             <ul>
                 <li
@@ -20,7 +20,7 @@
 import * as $http from 'axios'
 
 export default {
-    layout: 'navs',
+    layout: 'BaseLayout',
     async asyncData ({ params }) {
         const resp = await $http.get('boards')
         return { boards: resp.data.data }
@@ -28,6 +28,10 @@ export default {
 }
 </script>
 <style lang="less">
+.main {
+    padding: 16px;
+}
+
 ul {
     padding: 8px;
 

@@ -1,8 +1,8 @@
 <template>
-    <div class="navs">
+    <div class="base-layout">
         <Toast/>
         <div class="header"></div>
-        <nuxt id="section" />
+        <nuxt id="section"/>
         <div class="bottom-nav"></div>
     </div>
 </template>
