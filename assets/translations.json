@@ -23,6 +23,10 @@
         "en": "Write",
         "kr": "글쓰기"
     },
+    "EDIT": {
+        "en": "Edit",
+        "kr": "수정"
+    },
     "DELETE": {
         "en": "Delete",
         "kr": "삭제"
@@ -32,6 +36,14 @@
         "kr": "게시글을 삭제합니다"
     },
     "DELETE_CONFIRM_TXT": {
+        "en": "Type the password that you put when you write this article",
+        "kr": "게시글 작성 시 기입한 비밀번호를 입력하세요"
+    },
+    "EDIT_CONFIRM": {
+        "en": "Edit article",
+        "kr": "게시글을 수정합니다"
+    },
+    "EDIT_CONFIRM_TXT": {
         "en": "Type the password that you put when you write this article",
         "kr": "게시글 작성 시 기입한 비밀번호를 입력하세요"
     },

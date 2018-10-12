@@ -45,22 +45,8 @@ import Toast from '@/components/app/Toast'
 
 export default {
     layout: 'BaseLayout',
+    props: ['board', 'passedArticle'],
     components: { Toast },
-    async asyncData ({ params, query }) {
-        let myParams = {
-            filter: "title" + ":" + params.title
-        }
-        let board;
-        try {
-            const resp = await $http.get('boards', { params: myParams })
-            board = resp.data.data[0]
-        } catch (e) {
-            console.error(e.response.data)
-        }
-        return {
-            board
-        }
-    },
     data: () => ({
         article: {
             board: null,
@@ -71,12 +57,6 @@ export default {
         },
         valid: false
     }),
-    async validate ({ params }) {
-        const r1 = await $http.get('boards', { params: {
-            filter: "title" + ":" + params.title
-        }})
-        return r1.data.total === 1;
-    },
     watch: {
         article: {
             handler(newVal) {
@@ -99,7 +79,11 @@ export default {
             
             this.article.board = this.board;
             try {
-                const resp = await $http.post("articles", this.article)
+                if (this.passedArticle) {
+                    const resp = await $http.put("articles/" + this.article.id, this.article)
+                } else {
+                    const resp = await $http.post("articles", this.article)
+                }
                 this.toast(this.$translate("SUCCESS_SAVE"), "bg-success")
                 this.$router.push({ name: "board-title", params: { title: this.$route.params.title } })
             } catch (e) {
@@ -113,6 +97,11 @@ export default {
             })
         }
     },
+    mounted() {
+        if (this.passedArticle) {
+            this.article = this.passedArticle;
+        }
+    }
 }
 </script>
 
@@ -131,8 +120,6 @@ textarea {
 }
 
 .btn-container > button {
-    min-width: 80px;
-    width: 80px;
     margin-top: 8px;
     margin-left: 8px;
 }
