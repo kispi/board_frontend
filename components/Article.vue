@@ -1,8 +1,40 @@
 <template>
     <div class="article c-text-dark" v-if="article">
+
+        <Modal v-if="showPasswordConfirm" @close="resetPasswordConfirmPopup">
+            <h3 class="c-danger" slot="header">{{ 'DELETE_CONFIRM' | translate }}</h3>
+            <div class="f-14 c-text-dark" slot="body">
+                {{ 'DELETE_CONFIRM_TXT' | translate }}
+                <input
+                    type="password"
+                    class="input-block m-t-16"
+                    :placeholder="'PASSWORD' | translate"
+                    v-model="password"/>
+            </div>
+            <div class="flex-row flex-center" slot="footer">
+                <button class="btn btn-default flex-fill m-r-8" @click="resetPasswordConfirmPopup">{{ 'CANCEL' | translate }}</button>
+                <button
+                    class="btn btn-danger flex-fill"
+                    @click="onDeleteConfirm"
+                    :disabled="!password || password.length === 0">{{ 'CONFIRM' | translate }}</button>
+            </div>
+        </Modal>
+
         <div class="article-info">
-            <div class="article-title m-b-5">
-                {{ article.title }}
+            <div class="flex-row">
+                <div class="article-title m-b-5">
+                    {{ article.title }}
+                </div>
+                <div class="btn-container flex-row flex-wrap flex-right">
+                    <button
+                        class="btn btn-sm btn-accent m-r-8"
+                        v-if="article"
+                        @click="onEdit">{{ 'EDIT' | translate }}</button>
+                    <button
+                        class="btn btn-sm btn-danger"
+                        v-if="article"
+                        @click="onDelete">{{ 'DELETE' | translate }}</button>
+                </div>
             </div>
             <div class="flex-row">
                 <span class="flex-wrap vr">
@@ -22,7 +54,56 @@
 </template>
 
 <script>
+import Modal from '@/components/modals/Modal'
+import * as $http from 'axios'
+
 export default {
     props: ["article"],
+    components: { Modal },
+    data: () => ({
+        showPasswordConfirm: false,
+        password: null,
+        popup: {
+            title: null,
+            text: null,
+        }
+    }),
+    methods: {
+        onEdit() {
+            this.$router.push({ name: "write-title-articleId", params: { articleId: this.$route.params.articleId } })
+        },
+        onDelete() {
+            this.showPasswordConfirm = true;
+        },
+        resetPasswordConfirmPopup() {
+            this.password = null;
+            this.showPasswordConfirm = false;
+        },
+        async onDeleteConfirm() {
+            try {
+                const resp = await $http.delete('articles/' + this.article.id + "?password=" +this.password);
+                this.$router.push({ name: "board-title", params: { title: this.$route.params.title }});
+            } catch (e) {
+                console.log(e);
+                if (e.response) {
+                    switch (e.response.data) {
+                        case "INVALID_PASSWORD":
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+            this.resetPasswordConfirmPopup();
+        }
+    }
 }
 </script>
+<style lang="less" scoped>
+.btn-container {
+    button {
+        width: 60px !important;
+        flex: none;
+    }
+}
+</style>
