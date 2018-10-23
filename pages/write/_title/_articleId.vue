@@ -74,8 +74,7 @@ export default {
     },
     methods: {
         resetPasswordConfirmPopup() {
-            this.password = null;
-            this.showPasswordConfirm = false;
+            this.$router.go(-1);
         },
         async onPasswordConfirm() {
             try {
