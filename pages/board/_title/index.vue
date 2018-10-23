@@ -3,7 +3,7 @@
 
         <BoardInfo :board="board"/>
 
-        <Articles :articles="articles"/>
+        <Articles :articles="board.articles"/>
 
     </div>
 </template>
@@ -17,23 +17,16 @@ export default {
     layout: 'BaseLayout',
     components: { Articles, BoardInfo },
     async asyncData ({ params, query }) {
-        let board, articles;
+        let board;
         try {
             const r1 = await $http.get('boards', { params: {
                 filter: "title" + ":" + params.title
             }})
             board = r1.data.data[0]
-            const r2 = await $http.get('articles', { params: {
-                filter: "board_id" + ":" + board.id,
-                orderby: "-id",
-                limit: 20,
-            }})
-            articles = r2.data.data
         } catch(e) {
         }
         return {
-            board,
-            articles,
+            board
         }
     },
     async validate ({ params }) {

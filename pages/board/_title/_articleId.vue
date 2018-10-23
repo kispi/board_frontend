@@ -8,7 +8,7 @@
 
         <Articles
             :selectedArticle="article"
-            :articles="articles"/>
+            :articles="board.articles"/>
 
     </div>
 </template>
@@ -24,7 +24,7 @@ export default {
     layout: 'BaseLayout',
     components: { Article, Articles, BoardInfo, Modal },
     async asyncData ({ params, query }) {
-        let board, articles, article;
+        let board, article;
         try {
             let myParams = {
                 filter: "title" + ":" + params.title
@@ -37,16 +37,12 @@ export default {
                 orderby: "-id",
                 limit: 20,
             }
-            const r2 = await $http.get('articles', { params: myParams })
-            articles = r2.data.data
-
-            const r3 = await $http.get('articles/' + params.articleId)
-            article = r3.data.data
+            const r2 = await $http.get('articles/' + params.articleId)
+            article = r2.data.data
         } catch(e) {
         }
         return {
             board,
-            articles,
             article,
         }
     },

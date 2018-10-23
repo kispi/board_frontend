@@ -27,7 +27,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="flex flex-wrap flex-center reply">{{ article.replyCount || 0 }}</div>
+                <div class="flex flex-wrap flex-center reply-count">{{ article.replyCount || 0 }}</div>
             </div>
         </li>
     </ul>
