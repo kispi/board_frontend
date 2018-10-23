@@ -4,7 +4,7 @@
             <div class="flex-row m-b-8">
                 <input
                     name="nickname"
-                    class="form-control m-r-16"
+                    class="form-control m-r-8"
                     :placeholder="'NICKNAME' | translate"
                     v-model="article.nickname"
                     />
@@ -28,7 +28,7 @@
                 v-model="article.text"
                 />
         </form>
-        <div class="btn-container">
+        <div class="btn-container flex-rtl">
             <button
                 ref="save"
                 class="btn btn-primary save"
@@ -122,5 +122,6 @@ textarea {
 .btn-container > button {
     margin-top: 8px;
     margin-left: 8px;
+    width: 80px;
 }
 </style>

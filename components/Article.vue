@@ -2,9 +2,9 @@
     <div class="article c-text-dark" v-if="article">
 
         <Modal v-if="showPasswordConfirm" @close="resetPasswordConfirmPopup">
-            <h3 class="c-danger" slot="header">{{ 'DELETE_CONFIRM' | translate }}</h3>
+            <h3 class="c-danger" slot="header">{{ 'DELETE_ARTICLE_CONFIRM' | translate }}</h3>
             <div class="f-14 c-text-dark" slot="body">
-                {{ 'DELETE_CONFIRM_TXT' | translate }}
+                {{ 'DELETE_ARTICLE_CONFIRM_TXT' | translate }}
                 <input
                     type="password"
                     class="input-block m-t-16"
@@ -50,16 +50,20 @@
             </div>
         </div>
         <div class="article-text" v-html="article.text"/>
+        <Replies
+            :article="article"
+            :replies="article.replies"/>
     </div>
 </template>
 
 <script>
 import Modal from '@/components/modals/Modal'
+import Replies from '@/components/Replies'
 import * as $http from 'axios'
 
 export default {
-    props: ["article"],
-    components: { Modal },
+    props: ['article', 'replies'],
+    components: { Modal, Replies },
     data: () => ({
         showPasswordConfirm: false,
         password: null,

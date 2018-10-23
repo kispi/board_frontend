@@ -31,13 +31,25 @@
         "en": "Delete",
         "kr": "삭제"
     },
-    "DELETE_CONFIRM": {
+    "DELETE_ARTICLE_CONFIRM": {
         "en": "Delete article",
         "kr": "게시글을 삭제합니다"
     },
-    "DELETE_CONFIRM_TXT": {
-        "en": "Type the password that you put when you write this article",
+    "DELETE_ARTICLE_CONFIRM_TXT": {
+        "en": "Type the password that you put when you write the article",
         "kr": "게시글 작성 시 기입한 비밀번호를 입력하세요"
+    },
+    "DELETE_REPLY_CONFIRM": {
+        "en": "Delete reply",
+        "kr": "댓글을 삭제합니다"
+    },
+    "DELETE_REPLY_CONFIRM_TXT": {
+        "en": "Type the password that you put when you write the reply",
+        "kr": "댓글 작성 시 기입한 비밀번호를 입력하세요"
+    },
+    "TOTAL_REPLIES": {
+        "en": "Total Replies",
+        "kr": "전체 댓글"
     },
     "EDIT_CONFIRM": {
         "en": "Edit article",
@@ -78,6 +90,10 @@
     "WRITE_TEXT_PLACEHOLDER": {
         "en": "Write the text",
         "kr": "본문을 입력해주세요"
+    },
+    "WRITE_REPLY_PLACEHOLDER": {
+        "en": "Write reply",
+        "kr": "댓글을 입력해주세요"
     },
     "SUCCESS_SAVE": {
         "en": "Saved",

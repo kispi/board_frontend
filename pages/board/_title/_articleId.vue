@@ -3,9 +3,12 @@
 
         <BoardInfo :board="board" :article="article"/>
 
-        <Article :article="article"/>
+        <Article
+            :article="article"/>
 
-        <Articles :articles="articles"/>
+        <Articles
+            :selectedArticle="article"
+            :articles="articles"/>
 
     </div>
 </template>
@@ -53,5 +56,21 @@ export default {
         }})
         return r1.data.total === 1;
     },
+    created() {
+        this.$nuxt.$on('onReplyDeleted', _ => {
+            this.reloadArticle();
+        });
+        this.$nuxt.$on('onReplyPosted', _ => {
+            this.reloadArticle();
+        })
+    },
+    methods: {
+        async reloadArticle() {
+            try {
+                const resp = await $http.get('articles/' + this.article.id)
+                this.article = resp.data.data;
+            } catch(e) {}
+        },
+    }
 }
 </script>

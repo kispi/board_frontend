@@ -5,14 +5,16 @@
             @click="onClickArticle(article)"
             :key="article.id">
             <div class="flex-row">
-                <div class="flex-fill article-info">
+                <div
+                    class="flex-fill article-info"
+                    :class="{'selected': (selectedArticle || {}).id === article.id}">
                     <div class="flex-row flex-wrap">
                         <span class="flex-wrap vr">
                             {{ article.id }}
                         </span>
                         {{ article.title }}
                     </div>
-                    <div class="flex-row c-text">
+                    <div class="flex-row">
                         <span class="flex-wrap vr">
                             {{ article.nickname }}
                         </span>
@@ -25,7 +27,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="flex flex-wrap flex-center reply">2</div>
+                <div class="flex flex-wrap flex-center reply">{{ article.replyCount || 0 }}</div>
             </div>
         </li>
     </ul>
@@ -33,7 +35,7 @@
 
 <script>
 export default {
-    props: ["articles"],
+    props: ['selectedArticle', 'articles'],
     methods: {
         onClickArticle(article) {
             this.$router.push({

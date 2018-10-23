@@ -4,6 +4,9 @@ module.exports = {
             { charset: 'utf-8' },
             { name: 'viewport', content: 'width=device-width, initial-scale=1' },
             { hid: 'description', name: 'description', content: 'Meta description' }
+        ],
+        link: [
+            { rel: 'stylesheet', href: "https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css" }
         ]
     },
     css: [
