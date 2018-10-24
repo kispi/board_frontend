@@ -74,7 +74,7 @@ export default {
             if (!this.valid) {
                 let save = this.$refs["save"]
                 this.$shake(save)
-                this.$toast(this.$translate("ERROR_SAVE"), "bg-danger")
+                this.$toast.success("ERROR_SAVE")
                 return
             }
             
@@ -86,12 +86,12 @@ export default {
                 } else {
                     const resp = await $http.post("articles", this.article)
                 }
-                this.$toast(this.$translate("SUCCESS_SAVE"), "bg-success")
+                this.$toast.success("SUCCESS_SAVE")
                 this.$router.push({ name: "board-title", params: { title: this.$route.params.title } })
             } catch (e) {
-                this.$toast(this.$translate("ERROR_SAVE"), "bg-danger")
+                this.$toast.error("ERROR_SAVE")
             } finally {
-                this.$loading(false);
+                this.$loading(false)
             }
         },
     },

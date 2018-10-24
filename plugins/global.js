@@ -25,11 +25,22 @@ export const Loading = {
 
 export const Toast = {
     install(Vue) {
-        Vue.prototype.$toast = function(msg, bgClass) {
+        let emitToast = function(msg, bgClass) {
             $nuxt.$emit('onToast', {
                 message: msg,
                 class: bgClass
             })
+        }
+        Vue.prototype.$toast = {
+            success(msg) {
+                emitToast(msg, "bg-success")
+            },
+            error(msg) {
+                emitToast(msg, "bg-danger")
+            },
+            warning(msg) {
+                emitToast(msg, "bg-warning")
+            }
         }
     }
 }

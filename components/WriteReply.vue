@@ -62,6 +62,15 @@ export default {
         this.reply.article = this.article;
     },
     methods: {
+        resetReply() {
+            this.reply = {
+                article: null,
+                user: null,
+                nickname: null,
+                password: null,
+                text: null,
+            }
+        },
         async onClickSave() {
             if (!this.valid) {
                 let save = this.$refs["save"];
@@ -69,7 +78,8 @@ export default {
             }
             try {
                 const resp = await $http.post("replies", this.reply);
-                this.$nuxt.$emit('onReplyPosted');
+                this.$nuxt.$emit('onReplyPosted')
+                this.resetReply();
             } catch (e) {}
         }
     }
