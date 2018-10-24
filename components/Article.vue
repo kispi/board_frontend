@@ -49,7 +49,7 @@
                 </span>
             </div>
         </div>
-        <div class="article-text" v-html="article.text"/>
+        <div class="article-text" v-html="html"/>
         <Replies
             :article="article"
             :replies="article.replies"/>
@@ -72,6 +72,12 @@ export default {
             text: null,
         }
     }),
+    computed: {
+        html() {
+            let scriptRegex = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
+            return this.article.text.replace(scriptRegex, "");
+        }
+    },
     methods: {
         onEdit() {
             this.$router.push({ name: "write-title-articleId", params: { articleId: this.$route.params.articleId } })
