@@ -17,8 +17,19 @@ export const Shake = {
 
 export const Loading = {
     install(Vue) {
-        Vue.prototype.$loading = function(loading) {
-            $store.dispatch("setLoading", loading)
+        Vue.prototype.$loading = function(show) {
+            $nuxt.$emit('onSetLoading', show)
+        }
+    }
+}
+
+export const Toast = {
+    install(Vue) {
+        Vue.prototype.$toast = function(msg, bgClass) {
+            $nuxt.$emit('onToast', {
+                message: msg,
+                class: bgClass
+            })
         }
     }
 }
@@ -53,5 +64,6 @@ export const Download = {
 
 Vue.use(Shake)
 Vue.use(Loading)
+Vue.use(Toast)
 Vue.use(Copy)
 Vue.use(Download)

@@ -5,13 +5,8 @@
             v-if="toast.show">
             <div
                 class="toast shadow"
-                :class="toast.class"
-                @click.stop="toastClicked">
+                :class="toast.class">
                 <div v-html="html" />
-                <i
-                    class="zmdi zmdi-close"
-                    v-if="toast.type === 'dismiss'"
-                    @click="dismiss"/>
             </div>
         </div>
     </transition>
@@ -19,38 +14,36 @@
 
 <script>
 export default {
+    data: () => ({
+        toast: {
+            message: null,
+            class: null,
+            show: false,
+        }
+    }),
     methods: {
-        dismiss() {
-            this.$store.dispatch("app/toast/removeToast");
-        },
-        toastClicked() {},
+        resetToast() {
+            this.toast.message = null;
+            this.toast.class = null;
+            this.toast.show = false;
+        }
     },
     computed: {
-        showToast() {
-            return this.toast.show
-        },
-        toast() {
-            return this.$store.getters["app/toast/toast"]
-        },
         html() {
             return this.$options.filters.textToHTML(
                 this.$translate(this.toast.message)
             );
         },
     },
-    watch: {
-        showToast() {
-            if (this.toast.show) {
-                if (this.toastTimeout) {
-                    clearTimeout(this.toastTimeout);
-                }
-                if (!this.toast.type) {
-                    this.toastTimeout = setTimeout(() => {
-                        this.$store.dispatch("app/toast/removeToast");
-                    }, 3000);
-                }
-            }
-        },
-    }
+    mounted() {
+        this.$nuxt.$on('onToast', payload => {
+            this.toast = payload
+            this.toast.show = true;
+
+            var toastTimeout = setTimeout(() => {
+                this.resetToast();
+            }, 2000);
+        })
+    },
 };
 </script>

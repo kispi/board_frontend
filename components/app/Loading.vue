@@ -1,5 +1,5 @@
 <template>
-    <div class="loading">
+    <div class="loading" v-show="show">
         <Loader/>
     </div>
 </template>
@@ -9,6 +9,14 @@ import Loader from "@/components/app/Loader"
 export default {
     components: { Loader },
     name: 'Loading',
+    data: () => ({
+        show: false
+    }),
+    mounted() {
+        this.$nuxt.$on('onSetLoading', v => {
+            this.show = v;
+        })
+    }
 }
     
 </script>

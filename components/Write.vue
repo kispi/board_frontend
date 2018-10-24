@@ -74,28 +74,26 @@ export default {
             if (!this.valid) {
                 let save = this.$refs["save"]
                 this.$shake(save)
-                this.toast(this.$translate("ERROR_SAVE"), "bg-danger")
+                this.$toast(this.$translate("ERROR_SAVE"), "bg-danger")
+                return
             }
             
             this.article.board = this.board;
             try {
+                this.$loading(true);
                 if (this.passedArticle) {
                     const resp = await $http.put("articles/" + this.article.id, this.article)
                 } else {
                     const resp = await $http.post("articles", this.article)
                 }
-                this.toast(this.$translate("SUCCESS_SAVE"), "bg-success")
+                this.$toast(this.$translate("SUCCESS_SAVE"), "bg-success")
                 this.$router.push({ name: "board-title", params: { title: this.$route.params.title } })
             } catch (e) {
-                this.toast(this.$translate("ERROR_SAVE"), "bg-danger")
+                this.$toast(this.$translate("ERROR_SAVE"), "bg-danger")
+            } finally {
+                this.$loading(false);
             }
         },
-        toast(msg, bgClass) {
-            this.$store.dispatch("app/toast/setToast", {
-                message: msg,
-                class: bgClass
-            })
-        }
     },
     mounted() {
         if (this.passedArticle) {
