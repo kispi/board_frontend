@@ -22,7 +22,7 @@
 
         <div class="article-info">
             <div class="flex-row">
-                <div class="article-title m-b-5">
+                <div class="article-title m-b-5 title">
                     {{ article.title }}
                 </div>
                 <div class="btn-container flex-row flex-wrap flex-right">
@@ -37,7 +37,7 @@
                 </div>
             </div>
             <div class="flex-row">
-                <span class="flex-wrap vr">
+                <span class="flex-wrap vr nickname">
                     {{ article.nickname }}
                 </span>
                 <span class="flex-wrap vr">
@@ -77,6 +77,9 @@ export default {
             let scriptRegex = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
             return this.article.text.replace(scriptRegex, "");
         }
+    },
+    mounted() {
+        this.$loading(false);
     },
     methods: {
         onEdit() {

@@ -12,10 +12,12 @@
                         <span class="flex-wrap vr">
                             {{ article.id }}
                         </span>
-                        {{ article.title }}
+                        <span class="flex-fill title">
+                            {{ article.title }}
+                        </span>
                     </div>
                     <div class="flex-row">
-                        <span class="flex-wrap vr">
+                        <span class="flex-wrap vr nickname">
                             {{ article.nickname }}
                         </span>
                         <span class="flex-wrap vr">

@@ -23,7 +23,7 @@
             <i
                 class="zmdi zmdi-close p-absolute"
                 @click="onDelete"></i>
-            <div class="flex-wrap">
+            <div class="flex-wrap nickname">
                 {{ reply.nickname }}
             </div>
             <div>
