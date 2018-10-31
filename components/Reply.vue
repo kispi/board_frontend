@@ -56,18 +56,13 @@ export default {
         },
         async onDeleteConfirm() {
             try {
-                const resp = await $http.delete('replies/' + this.reply.id + "?password=" +this.password);
+                const resp = await $http.delete('replies/' + this.reply.id + "?password=" + this.password);
                 this.password = null;
+                this.$toast.success("SUCCESS_DELETE");
                 this.$nuxt.$emit('onReplyDeleted');
             } catch (e) {
-                console.log(e);
                 if (e.response) {
-                    switch (e.response.data) {
-                        case "INVALID_PASSWORD":
-                            break;
-                        default:
-                            break;
-                    }
+                    this.$toast.error(e.response.data);
                 }
             }
             this.resetPasswordConfirmPopup();

@@ -1,6 +1,6 @@
 <template>
     <div class="article-edit">
-        <Modal v-if="showPasswordConfirm" @close="resetPasswordConfirmPopup">
+        <Modal v-if="showPasswordConfirm" @close="$router.go(-1)">
             <h3 class="c-accent" slot="header">{{ 'EDIT_CONFIRM' | translate }}</h3>
             <div class="f-14 c-text-dark" slot="body">
                 {{ 'EDIT_CONFIRM_TXT' | translate }}
@@ -11,7 +11,7 @@
                     v-model="password"/>
             </div>
             <div class="flex-row flex-center" slot="footer">
-                <button class="btn btn-default flex-fill m-r-8" @click="resetPasswordConfirmPopup">{{ 'CANCEL' | translate }}</button>
+                <button class="btn btn-default flex-fill m-r-8" @click="$router.go(-1)">{{ 'CANCEL' | translate }}</button>
                 <button
                     class="btn btn-accent flex-fill"
                     @click="onPasswordConfirm"
@@ -73,9 +73,6 @@ export default {
         return true;
     },
     methods: {
-        resetPasswordConfirmPopup() {
-            this.$router.go(-1);
-        },
         async onPasswordConfirm() {
             try {
                 const r = await $http.post('articles/' + this.$route.params.articleId + "/checkPassword", {
@@ -86,9 +83,12 @@ export default {
                     this.edit = true;
                 }
             } catch (e) {
-                this.$router.push({ name: "board-title", params: { title: this.$route.params.title }});
+                if (e.response) {
+                    this.$toast.error(e.response.data);
+                    this.$router.push({ name: "board-title", params: { title: this.$route.params.title }});
+                }
             }
-            this.resetPasswordConfirmPopup();
+            this.$router.go(-1);
         },
     }
 }

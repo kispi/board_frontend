@@ -59,12 +59,12 @@ export default {
         }
     },
     mounted() {
-        this.reply.article = this.article;
+        this.initReply();
     },
     methods: {
-        resetReply() {
+        initReply() {
             this.reply = {
-                article: null,
+                article: this.article,
                 user: null,
                 nickname: null,
                 password: null,
@@ -78,8 +78,9 @@ export default {
             }
             try {
                 const resp = await $http.post("replies", this.reply);
-                this.$nuxt.$emit('onReplyPosted')
-                this.resetReply();
+                this.$nuxt.$emit('onReplyPosted');
+                this.$toast.success("SUCCESS_SAVE");
+                this.initReply();
             } catch (e) {}
         }
     }

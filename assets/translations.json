@@ -102,5 +102,13 @@
     "ERROR_SAVE": {
         "en": "Failed to save",
         "kr": "저장에 실패하였습니다"
+    },
+    "SUCCESS_DELETE": {
+        "en": "Deleted",
+        "kr": "삭제되었습니다"
+    },
+    "INVALID_PASSWORD": {
+        "en": "Invalid Password",
+        "kr": "잘못된 비밀번호입니다"
     }
 }

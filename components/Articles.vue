@@ -16,7 +16,7 @@
                             {{ article.title }}
                         </span>
                     </div>
-                    <div class="flex-row">
+                    <div class="flex-row c-text">
                         <span class="flex-wrap vr nickname">
                             {{ article.nickname }}
                         </span>

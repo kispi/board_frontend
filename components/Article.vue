@@ -95,16 +95,11 @@ export default {
         async onDeleteConfirm() {
             try {
                 const resp = await $http.delete('articles/' + this.article.id + "?password=" +this.password);
+                this.$toast.success("SUCCESS_DELETE");
                 this.$router.push({ name: "board-title", params: { title: this.$route.params.title }});
             } catch (e) {
-                console.log(e);
                 if (e.response) {
-                    switch (e.response.data) {
-                        case "INVALID_PASSWORD":
-                            break;
-                        default:
-                            break;
-                    }
+                    this.$toast.error(e.response.data);
                 }
             }
             this.resetPasswordConfirmPopup();
