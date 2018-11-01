@@ -85,10 +85,9 @@ export default {
             } catch (e) {
                 if (e.response) {
                     this.$toast.error(e.response.data);
-                    this.$router.push({ name: "board-title", params: { title: this.$route.params.title }});
+                    this.$router.go(-1);
                 }
             }
-            this.$router.go(-1);
         },
     }
 }
