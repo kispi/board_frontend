@@ -53,7 +53,7 @@
                 </span>
             </div>
         </div>
-        <div class="article-text" v-html="html"/>
+        <div class="article-text" v-html="article.text"/>
         <Replies
             :article="article"
             :replies="article.replies"/>
@@ -76,12 +76,6 @@ export default {
             text: null,
         }
     }),
-    computed: {
-        html() {
-            let scriptRegex = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
-            return this.article.text.replace(scriptRegex, "");
-        }
-    },
     mounted() {
         this.$loading(false);
     },

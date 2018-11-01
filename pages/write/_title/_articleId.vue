@@ -88,6 +88,7 @@ export default {
                     this.$router.go(-1);
                 }
             }
+            this.showPasswordConfirm = false;
         },
     }
 }
