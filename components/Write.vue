@@ -84,7 +84,7 @@ export default {
                 this.validLength =
                     (newVal.nickname.length <= 12 &&
                     newVal.password.length <= 12 &&
-                    newVal.title <= 30 &&
+                    newVal.title.length <= 30 &&
                     newVal.text.length <= 10000);
             },
             deep: true
