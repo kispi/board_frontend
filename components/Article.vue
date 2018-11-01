@@ -37,12 +37,13 @@
                 </div>
             </div>
             <div class="flex-row">
-                <span class="flex-wrap vr nickname">
+                <span class="flex-wrap nickname">
                     {{ article.nickname }}
-                    <span v-if="article.ip && !article.user">
-                        ({{ article.ip | hideTail }})
-                    </span>
                 </span>
+                <span class="flex-wrap" v-if="article.ip && !article.user">
+                    ({{ article.ip | hideTail }})
+                </span>
+                <span class="flex-wrap vr"></span>
                 <span class="flex-wrap vr">
                     {{ article.createdAt | formatDate(undefined, true) }}
                 </span>
