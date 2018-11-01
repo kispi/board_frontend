@@ -61,8 +61,17 @@ export const formatDate = (value, format, showTrimmedTime) => {
     return result;
 }
 
+export const hideTail = (ip) => {
+    if (!ip || ip.length === 0) {
+        return;
+    }
+    let segments = ip.split(".");
+    return segments[0] + "." + segments[1];
+}
+
 Vue.filter('translate', translate)
 Vue.filter('textToHTML', textToHTML)
 Vue.filter('toCamel', toCamel)
 Vue.filter('toSnake', toSnake)
 Vue.filter('formatDate', formatDate)
+Vue.filter('hideTail', hideTail)

@@ -58,6 +58,7 @@ export default {
             password: null,
             title: null,
             text: null,
+            ip: window.ip()
         },
         valid: false
     }),

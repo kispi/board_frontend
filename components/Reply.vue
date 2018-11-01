@@ -7,7 +7,7 @@
                 <input
                     type="password"
                     class="input-block m-t-16"
-                    :placeholder="'PASSWORD' | translate"
+                    :placeholderㅊ="'PASSWORD' | translate"
                     v-model="password"/>
             </div>
             <div class="flex-row flex-center" slot="footer">
@@ -25,11 +25,14 @@
                 @click="onDelete"></i>
             <div class="flex-wrap nickname">
                 {{ reply.nickname }}
+                <span class="c-text" v-if="reply.ip && !reply.user">
+                    ({{ reply.ip | hideTail }})
+                </span>
             </div>
             <div>
                 {{ reply.text }}
             </div>
-            <div class="flex-wrap vr">
+            <div class="flex-wrap vr c-text">
                 {{ reply.createdAt | formatDate("YYYY-MM-DD HH:mm:ss") }}
             </div>
         </div>

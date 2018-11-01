@@ -69,6 +69,7 @@ export default {
                 nickname: null,
                 password: null,
                 text: null,
+                ip: window.ip()
             }
         },
         async onClickSave() {
