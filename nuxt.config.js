@@ -1,6 +1,5 @@
 import prod from './config/prod.env'
 import dev from './config/dev.env'
-import { store as $store } from './store'
 
 const config = {
     server: {
