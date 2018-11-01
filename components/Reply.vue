@@ -23,16 +23,18 @@
             <i
                 class="zmdi zmdi-close p-absolute"
                 @click="onDelete"></i>
-            <div class="flex-wrap nickname">
-                {{ reply.nickname }}
+            <div class="flex-row">
+                <span class="flex-wrap nickname">
+                    {{ reply.nickname }}
+                </span>
                 <span class="c-text" v-if="reply.ip && !reply.user">
                     ({{ reply.ip | hideTail }})
                 </span>
             </div>
-            <div>
+            <div class="break-word">
                 {{ reply.text }}
             </div>
-            <div class="flex-wrap vr c-text">
+            <div class="flex-wrap c-text">
                 {{ reply.createdAt | formatDate("YYYY-MM-DD HH:mm:ss") }}
             </div>
         </div>
