@@ -4,12 +4,14 @@
             <div class="flex-row m-b-8">
                 <input
                     name="nickname"
+                    maxlength="12"
                     class="form-control m-r-8"
                     :placeholder="'NICKNAME' | translate"
                     v-model="reply.nickname"
                     />
                 <input
                     type="password"
+                    maxlength="12"
                     name="password"
                     class="form-control"
                     :placeholder="'PASSWORD' | translate"
@@ -48,15 +50,31 @@ export default {
             text: null,
         },
         valid: false,
+        validLength: false
     }),
     watch: {
         reply: {
             handler(newVal) {
-                this.valid = (newVal.nickname && newVal.password && newVal.text) &&
-                    (newVal.nickname !== "" && newVal.password !== "" && newVal.text !== "")
+                if (!newVal.nickname ||
+                    !newVal.password ||
+                    !newVal.text) {
+                    this.valid = false;
+                    this.validLength = false;
+                    return
+                }
+
+                this.valid =   
+                    (newVal.nickname !== "" &&
+                    newVal.password !== "" &&
+                    newVal.text !== "");
+
+                this.validLength =
+                    (newVal.nickname.length <= 12 &&
+                    newVal.password.length <= 12 &&
+                    newVal.text.length <= 200);
             },
             deep: true
-        }
+        },
     },
     mounted() {
         this.initReply();
@@ -73,9 +91,16 @@ export default {
             }
         },
         async onClickSave() {
+            let save = this.$refs["save"];
             if (!this.valid) {
-                let save = this.$refs["save"];
                 this.$shake(save);
+                this.$toast.error("ERROR_REQUIRED_FIELDS")
+                return
+            }
+            if (!this.validLength) {
+                this.$shake(save)
+                this.$toast.error("ERROR_INVALID_LENGTH")
+                return
             }
             try {
                 const resp = await $http.post("replies", this.reply);

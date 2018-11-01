@@ -36,7 +36,7 @@
             <button
                 ref="save"
                 class="btn btn-primary save"
-                :class="{ 'disabled' : !valid }"
+                :class="{ 'disabled' : !valid || !validLength }"
                 @click="onClickSave">{{ 'SAVE' | translate }}</button>
             <button class="btn btn-default cancel" @click="onClickCancel">{{ 'CANCEL' | translate }}</button>
         </div>
@@ -60,13 +60,32 @@ export default {
             text: null,
             ip: window.ip()
         },
-        valid: false
+        valid: false,
+        validLength: false,
     }),
     watch: {
         article: {
             handler(newVal) {
-                this.valid = (newVal.nickname && newVal.password && newVal.title && newVal.text) &&
-                    (newVal.nickname !== "" && newVal.password !== "" && newVal.title !== "" && newVal.text !== "")
+                if (!newVal.nickname ||
+                    !newVal.password ||
+                    !newVal.title ||
+                    !newVal.text) {
+                    this.valid = false;
+                    this.validLength = false;
+                    return
+                }
+
+                this.valid =   
+                    (newVal.nickname !== "" &&
+                    newVal.password !== "" &&
+                    newVal.title !== "" &&
+                    newVal.text !== "");
+
+                this.validLength =
+                    (newVal.nickname.length <= 12 &&
+                    newVal.password.length <= 12 &&
+                    newVal.title <= 30 &&
+                    newVal.text.length <= 10000);
             },
             deep: true
         }
@@ -76,13 +95,17 @@ export default {
             this.$router.go(-1)
         },
         async onClickSave() {
+            let save = this.$refs["save"]
             if (!this.valid) {
-                let save = this.$refs["save"]
                 this.$shake(save)
-                this.$toast.error("ERROR_SAVE")
+                this.$toast.error("ERROR_REQUIRED_FIELDS")
                 return
             }
-            
+            if (!this.validLength) {
+                this.$shake(save)
+                this.$toast.error("ERROR_INVALID_LENGTH")
+                return
+            }
             this.article.board = this.board;
             try {
                 this.$loading(true);

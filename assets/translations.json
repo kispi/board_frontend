@@ -103,6 +103,14 @@
         "en": "Failed to save",
         "kr": "저장에 실패하였습니다"
     },
+    "ERROR_REQUIRED_FIELDS": {
+        "en": "Missing required fields",
+        "kr": "필수항목이 누락되었습니다"
+    },
+    "ERROR_INVALID_LENGTH": {
+        "en": "Maxlength exceeds",
+        "kr": "최대 글자수를 초과한 항목이 있습니다"
+    },
     "SUCCESS_DELETE": {
         "en": "Deleted",
         "kr": "삭제되었습니다"

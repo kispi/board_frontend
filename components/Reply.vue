@@ -7,7 +7,7 @@
                 <input
                     type="password"
                     class="input-block m-t-16"
-                    :placeholderㅊ="'PASSWORD' | translate"
+                    :placeholder="'PASSWORD' | translate"
                     v-model="password"/>
             </div>
             <div class="flex-row flex-center" slot="footer">

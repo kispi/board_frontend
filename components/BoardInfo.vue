@@ -1,16 +1,14 @@
 <template>
     <div>
-        <div class="flex-row p-8">
+        <div class="flex-row items-center p-8">
             <div class="flex-fill">
                 <h2
                     class="c-secondary"
                     @click="onClickBoardTitle">{{ board.title }} <span v-if="board.description">({{ board.description }})</span></h2>
             </div>
-            <div class="btn-container flex-row flex-rtl items-center">
-                <button
-                    class="btn btn-sm btn-secondary m-l-8"
-                    @click="onClickWrite">{{ 'WRITE' | translate }}</button>
-            </div>
+            <button
+                class="btn btn-sm btn-secondary flex-wrap m-l-8"
+                @click="onClickWrite">{{ 'WRITE' | translate }}</button>
         </div>
     </div>
 </template>
@@ -31,11 +29,3 @@ export default {
     },
 }
 </script>
-<style lang="less" scoped>
-.btn-container {
-    button {
-        width: 60px !important;
-        flex: none;
-    }
-}
-</style>

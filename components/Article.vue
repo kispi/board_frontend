@@ -21,8 +21,8 @@
         </Modal>
 
         <div class="article-info">
-            <div class="flex-row">
-                <div class="article-title m-b-5 title">
+            <div class="flex-row items-center">
+                <div class="article-title title">
                     {{ article.title }}
                 </div>
                 <div class="btn-container flex-row flex-wrap flex-right">
@@ -111,10 +111,4 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-.btn-container {
-    button {
-        width: 60px !important;
-        flex: none;
-    }
-}
 </style>
