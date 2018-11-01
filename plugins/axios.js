@@ -1,4 +1,3 @@
-import Vue from 'vue'
 import axios from 'axios'
 
 axios.defaults.transformResponse = [function(response) {

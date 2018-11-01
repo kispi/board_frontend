@@ -1,5 +1,4 @@
 import Vue from 'vue'
-import { store as $store } from '@/store'
 import * as $http from 'axios'
 
 export const Shake = {

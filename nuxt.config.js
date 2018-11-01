@@ -1,7 +1,16 @@
-module.exports = {
+import prod from './config/prod.env'
+import dev from './config/dev.env'
+import { store as $store } from './store'
+
+const config = {
     server: {
         port: 3000,
         host: '0.0.0.0'
+    },
+    router: {
+        scrollBehavior() {
+            return { x: 0, y: 0 }
+        },
     },
     head: {
         meta: [
@@ -25,8 +34,12 @@ module.exports = {
         '@/filters/index',
         '@/directives/index'
     ],
-    env: {
-        baseUrl: process.env.BASE_URL || 'http://18.191.4.5:3000',
-        apiUrl: 'http://18.191.4.5:4500/v1/'
-    }
+    dev: (process.env.NODE_ENV !== 'production'),
+    env: prod
 }
+
+if (config.dev) {
+    config.env = dev;
+}
+
+export default config

@@ -1,17 +1,19 @@
 {
-	"name": "board_frontend",
-	"scripts": {
-		"dev": "nuxt"
-	},
-	"dependencies": {
-		"axios": "^0.18.0",
-		"npm": "^6.4.1",
-		"nuxt": "^2.1.0",
-		"vue-material-design-icons": "^2.3.0",
-		"vue-moment": "^4.0.0"
-	},
-	"devDependencies": {
-		"less": "^3.8.1",
-		"less-loader": "^4.1.0"
-	}
+    "name": "board_frontend",
+    "scripts": {
+        "dev": "nuxt",
+        "build": "nuxt build",
+        "start": "nuxt start"
+    },
+    "dependencies": {
+        "axios": "^0.18.0",
+        "npm": "^6.4.1",
+        "nuxt": "^2.1.0",
+        "vue-material-design-icons": "^2.3.0",
+        "vue-moment": "^4.0.0"
+    },
+    "devDependencies": {
+        "less": "^3.8.1",
+        "less-loader": "^4.1.0"
+    }
 }
