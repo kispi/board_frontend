@@ -1,24 +1,6 @@
 <template>
     <div class="article-edit">
-        <Modal v-if="showPasswordConfirm" @close="$router.go(-1)">
-            <h3 class="c-accent" slot="header">{{ 'EDIT_CONFIRM' | translate }}</h3>
-            <div class="f-14 c-text-dark" slot="body">
-                {{ 'EDIT_CONFIRM_TXT' | translate }}
-                <input
-                    type="password"
-                    class="input-block m-t-16"
-                    :placeholder="'PASSWORD' | translate"
-                    v-model="password"/>
-            </div>
-            <div class="flex-row flex-center" slot="footer">
-                <button class="btn btn-default flex-fill m-r-8" @click="$router.go(-1)">{{ 'CANCEL' | translate }}</button>
-                <button
-                    class="btn btn-accent flex-fill"
-                    @click="onPasswordConfirm"
-                    :disabled="!password || password.length === 0">{{ 'CONFIRM' | translate }}</button>
-            </div>
-        </Modal>
-        <Write :board="board" :passedArticle="article" v-if="edit"/>
+        <Write :board="board" :passedArticle="article"/>
     </div>
 </template>
 
@@ -48,11 +30,6 @@ export default {
             article, board
         }
     },
-    data: () => ({
-        edit: false,
-        password: null,
-        showPasswordConfirm: true,
-    }),
     async validate ({ params }) {
         const r1 = await $http.get('boards', { params: {
             filter: "title" + ":" + params.title
@@ -68,28 +45,13 @@ export default {
 
         if (r2.data.total !== 1) {
             return false;
-        }        
+        }
+
+        if (window.localStorage.getItem("password") === undefined) {
+            return false;
+        }
 
         return true;
-    },
-    methods: {
-        async onPasswordConfirm() {
-            try {
-                const r = await $http.post('articles/' + this.$route.params.articleId + "/checkPassword", {
-                    password: this.password
-                })
-                if (r.data.data === "success") {
-                    this.article.password = this.password;
-                    this.edit = true;
-                }
-            } catch (e) {
-                if (e.response) {
-                    this.$toast.error(e.response.data);
-                    this.$router.go(-1);
-                }
-            }
-            this.showPasswordConfirm = false;
-        },
     }
 }
 </script>

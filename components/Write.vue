@@ -127,6 +127,12 @@ export default {
         if (this.passedArticle) {
             this.article = this.passedArticle;
         }
+        
+        let password = window.localStorage.getItem("password");
+        if (password !== undefined) {
+            this.article.password = password;
+            window.localStorage.removeItem("password");
+        }
     }
 }
 </script>
