@@ -14,7 +14,7 @@ export default {
     components: { Modal, Write },
     async asyncData ({ params, query }) {
         let myParams = {
-            filter: "title" + ":" + params.title
+            query: "title" + ":" + params.title
         }
         let board, article;
         try {
@@ -32,7 +32,7 @@ export default {
     },
     async validate ({ params }) {
         const r1 = await $http.get('boards', { params: {
-            filter: "title" + ":" + params.title
+            query: "title" + ":" + params.title
         }})
 
         if (r1.data.total !== 1) {
@@ -40,7 +40,7 @@ export default {
         }
 
         const r2 = await $http.get('articles', { params: {
-            filter: "id" + ":" + params.articleId
+            query: "id" + ":" + params.articleId
         }})
 
         if (r2.data.total !== 1) {

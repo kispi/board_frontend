@@ -117,7 +117,7 @@ export default {
                 this.$toast.success("SUCCESS_SAVE")
                 this.$router.push({ name: "board-title", params: { title: this.$route.params.title } })
             } catch (e) {
-                this.$toast.error("ERROR_SAVE")
+                this.$toast.error(e.response.data)
             } finally {
                 this.$loading(false)
             }

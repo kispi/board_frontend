@@ -13,7 +13,7 @@ export default {
     components: { Write },
     async asyncData ({ params, query }) {
         let myParams = {
-            filter: "title" + ":" + params.title
+            query: "title" + ":" + params.title
         }
         let board;
         try {
@@ -28,7 +28,7 @@ export default {
     },
     async validate ({ params }) {
         const r1 = await $http.get('boards', { params: {
-            filter: "title" + ":" + params.title
+            query: "title" + ":" + params.title
         }})
         return r1.data.total === 1;
     },

@@ -23,26 +23,27 @@ export default {
     }),
     methods: {
         resetToast() {
-            this.toast.message = null;
-            this.toast.class = null;
-            this.toast.show = false;
+            this.toast.message = null
+            this.toast.class = null
+            this.toast.show = false
         }
     },
     computed: {
         html() {
             return this.$options.filters.textToHTML(
                 this.$translate(this.toast.message)
-            );
+            )
         },
     },
     mounted() {
         this.$nuxt.$on('onToast', payload => {
+            payload.message = payload.message.trim();
             this.toast = payload
-            this.toast.show = true;
+            this.toast.show = true
 
             var toastTimeout = setTimeout(() => {
-                this.resetToast();
-            }, 2000);
+                this.resetToast()
+            }, 2000)
         })
     },
 };

@@ -1,8 +1,10 @@
-import Vue from 'vue'
 import Vuex from 'vuex'
-
-Vue.use(Vuex)
+import AuthToken from './models/authToken'
+import User from './models/user'
 
 export const store = new Vuex.Store({
-    modules: {}
+    modules: {
+        AuthToken,
+        User
+    }
 })

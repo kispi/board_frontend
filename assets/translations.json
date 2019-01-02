@@ -118,5 +118,9 @@
     "INVALID_PASSWORD": {
         "en": "Invalid Password",
         "kr": "잘못된 비밀번호입니다"
+    },
+    "INVALID_ARTICLE": {
+        "en": "Invalid Article",
+        "kr": "글이 올바르지 않습니다"
     }
 }
