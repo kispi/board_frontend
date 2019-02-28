@@ -1,4 +1,4 @@
 export default {
-    baseUrl: 'http://18.191.166.209:3000/',
-    apiUrl: 'http://18.191.166.209:4500/v1/'
+    baseUrl: 'http://api.kispi.net:3000/',
+    apiUrl: 'http://api.kispi.net:4500/v1/'
 }
